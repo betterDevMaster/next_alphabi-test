@@ -14,19 +14,15 @@ const Gallery = ({ searchValue }) => {
     isLoading: false,
     total: 0,
   });
-  const [currentPage, setCurrentPage] = useState({ index: 1, reload: true });
+  const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
-    if (searchValue) setCurrentPage({ index: 1, reload: true });
-  }, [searchValue]);
-
-  useEffect(() => {
-    if (searchValue && currentPage.reload) fetchApi(searchValue);
+    if (searchValue) fetchApi(searchValue);
   }, [searchValue, currentPage]);
 
   const fetchApi = async (val) => {
     const key = process.env.NEXT_PUBLIC_API_KEY;
-    const offset = PageSize * currentPage.index;
+    const offset = PageSize * currentPage;
     setImages({ ...images, isLoading: true });
 
     try {
@@ -43,13 +39,11 @@ const Gallery = ({ searchValue }) => {
           total: ret.pagination.total_count,
         });
       } else {
-        setCurrentPage({ index: 1, reload: false });
-        setImages({ source: [], isLoading: false, total: 0 });
+        setImages({ ...images, source: [], isLoading: false });
       }
     } catch (error) {
       console.log(error);
       toast.error("fetchApi Error: " + error.message);
-      setCurrentPage({ index: 1, reload: false });
       setImages({ source: [], isLoading: false, total: 0 });
     }
   };
@@ -100,10 +94,10 @@ const Gallery = ({ searchValue }) => {
       )}
       <Pagination
         customClass="mt-4"
-        currentPage={currentPage.index}
+        currentPage={currentPage}
         totalCount={images.total}
         pageSize={PageSize}
-        onPageChange={(page) => setCurrentPage({ index: page, reload: true })}
+        onPageChange={setCurrentPage}
       />
       <Toaster position="bottom-right" reverseOrder={false} />
     </div>

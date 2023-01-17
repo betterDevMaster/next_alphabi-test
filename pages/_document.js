@@ -15,6 +15,14 @@ export default function Document() {
         <meta property="og:title" content="Alphabi" />
         <meta property="og:url" content="https://test.com" />
         <meta property="og:site_name" content="Alphabi" />
+        <meta
+          property="og:image"
+          content="https://mir-s3-cdn-cf.behance.net/projects/202/6f27f626741397.556c85303e4f8.png"
+        />
+        <meta
+          name="msapplication-TileImage"
+          content="https://mir-s3-cdn-cf.behance.net/projects/202/6f27f626741397.556c85303e4f8.png"
+        />
         <link
           rel="stylesheet"
           href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700"

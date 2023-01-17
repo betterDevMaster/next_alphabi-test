@@ -27,7 +27,7 @@ const Gallery = ({ searchValue }) => {
 
     try {
       const response = await fetch(
-        `http://api.giphy.com/v1/gifs/search?q=${val}&api_key=${key}&offset=${offset}&limit=${PageSize}`
+        `https://api.giphy.com/v1/gifs/search?q=${val}&api_key=${key}&offset=${offset}&limit=${PageSize}`
       );
       const ret = await response.json();
 
